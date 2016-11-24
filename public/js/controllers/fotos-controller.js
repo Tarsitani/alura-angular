@@ -1,7 +1,17 @@
-angular.module('alurapic').controller('FotosController', function($scope) {
+angular.module('alurapic').controller('FotosController', function($scope, $http) {
 
-    $scope.foto = {
-        url : "http://41.media.tumblr.com/658688f96c218a092c2856bd39291c99/tumblr_nzbiuikY7u1u4jtvbo1_500.jpg",
-        titulo : "GameCube Logo"
-    };
+    $scope.fotos = []; //cria um array
+
+    $http.get('v1/fotos').success(function(foto){
+        $scope.fotos = foto; //não precisa do .data quando usa-se success
+    }).error(function(erro){
+        console.log(erro);
+    });
+
+    /* $http.get('v1/fotos') //faz um requisito para o URL passado e tenta pegar os dados, "faz uma promessa"
+    .then(funtion(retorno) { //dai(then) caso ele consiga ter acesso a esses dados
+        $scope.fotos = retorno.data; //salva no array criado anteriormente os dados(data)
+    }).catch(function(error){ //caso ele não consiga pegar os dados, solta uma mensagem de erro
+        console.log(error);
+    }); */
 });
