@@ -1,6 +1,7 @@
 angular.module('alurapic').controller('FotosController', function($scope, $http) {
 
     $scope.fotos = []; //cria um array
+    $scope.filtro = ''; //vai ser guardado aqui a string que for digitada no filtro
 
     $http.get('v1/fotos').success(function(foto){
         $scope.fotos = foto; //não precisa do .data quando usa-se success
